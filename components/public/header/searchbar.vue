@@ -8,11 +8,11 @@
       <el-col :span="6">
         <div class="avatar">
           <!-- <font-awesome-icon :icon="icon" /> -->
-          <a href="https://baidu.com"
+          <nuxt-link to="/login"
             ><el-avatar
               src="https://gravatar.catbk.cn/avatar/56f43d1f6f9e5b6d3a2b893385007161?s=96&d=https%3A%2F%2Fgravatar.ufile.ucloud.com.cn%2FTransparent_Akkarin-e1582610381361.png&r=g"
             ></el-avatar
-          ></a>
+          ></nuxt-link>
         </div>
       </el-col>
     </el-row>
