@@ -1,0 +1,158 @@
+* {
+  box-sizing: border-box;
+}
+.chinese-font {
+  font-family: 'zhanku', 'Merriweather Sans', Helvetica, Tahoma, Arial,
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',
+    sans-serif;
+}
+.serif {
+  font-family: 'zhanku', 'Noto Serif SC', 'Source Han Serif SC',
+    'Source Han Serif', source-han-serif-sc, 'PT Serif', 'SongTi SC',
+    'MicroSoft Yahei', Georgia, serif;
+}
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+body {
+  margin: 0;
+  font: 300 17px;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+body,
+button,
+input,
+select,
+textarea {
+  color: #404040;
+  font-size: 15px;
+  line-height: 1.5;
+}
+::selection {
+  background: #444;
+  color: #fff;
+}
+::-webkit-scrollbar-track {
+  background-color: #eee;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #69d2e7;
+}
+::-webkit-scrollbar-thumb {
+  background: #fe9600;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #eee;
+}
+:after,
+:before {
+  box-sizing: inherit;
+}
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+.clear:after,
+.clear:before,
+.comment-content:after,
+.comment-content:before,
+.entry-content:after,
+.entry-content:before,
+.site-content:after,
+.site-content:before,
+.site-footer:after,
+.site-footer:before,
+.site-header:after,
+.site-header:before {
+  content: '';
+  display: table;
+  table-layout: fixed;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+.comments,
+.notice,
+.post-list,
+.post-list-thumb,
+.top-feature {
+  animation: main 0.6s;
+}
+
+p {
+  margin-bottom: 1.5em;
+  cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/texto.cur),
+    auto;
+}
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+.float-content {
+  position: relative;
+  width: 100%;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 50;
+  color: rgba(0, 0, 0, 0.66);
+}
+body {
+  background: #fff;
+  background-attachment: fixed;
+  cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/normal.cur),
+    auto;
+}
+
+a {
+  background-color: transparent;
+  text-decoration: none;
+  cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/ayuda.cur),
+    auto;
+}
+a {
+  color: #e67474;
+  outline: 0;
+  -webkit-transition: color 0.2s ease-out, border 0.2s ease-out,
+    opacity 0.2s ease-out;
+  -moz-transition: color 0.2s ease-out, border 0.2s ease-out,
+    opacity 0.2s ease-out;
+  transition: color 0.2s ease-out, border 0.2s ease-out, opacity 0.2s ease-out;
+}
+img {
+  height: auto;
+  max-width: 100%;
+  border: 0;
+}

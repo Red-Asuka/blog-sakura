@@ -1,0 +1,12 @@
+.site-footer {
+  padding: 2%;
+  background: rgba(255, 255, 255, 0.8);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.site-info {
+  text-align: center;
+  font-size: 13px;
+  color: #b9b9b9;
+}
