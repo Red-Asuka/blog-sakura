@@ -86,10 +86,10 @@
 import CryptoJS from 'crypto-js'
 
 export default {
+  layout: 'blank',
   data() {
     return { checked: '', username: '', password: '', error: '' }
   },
-  layout: 'blank',
   methods: {
     login: function() {
       let self = this
@@ -117,6 +117,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import '@/assets/css/login/index.css';
 </style>

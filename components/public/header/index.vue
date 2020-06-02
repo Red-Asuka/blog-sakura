@@ -1,5 +1,10 @@
 <template>
   <div class="site-header">
+    <div
+      class="scrollbar"
+      id="bar"
+      style="width: 82%; background: orange;"
+    ></div>
     <el-row :gutter="20">
       <el-col :span="4">
         <site-loge />
@@ -43,5 +48,17 @@ export default {
   left: 0;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 1px 40px -8px rgba(0, 0, 0, 0.5);
+}
+.scrollbar {
+  position: fixed;
+  top: 0;
+  height: 3px;
+  background: orange;
+  transition-duration: 1s, 1s;
+  z-index: 99999;
+}
+.scrollbar,
+.butterBar-message {
+  background: #fe9600 !important;
 }
 </style>

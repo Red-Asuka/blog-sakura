@@ -18,9 +18,26 @@ html {
   overflow-x: hidden;
 }
 body {
+  background: #fff;
+  background-attachment: fixed;
+  cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/normal.cur),
+    auto;
+}
+body {
   margin: 0;
   font: 300 17px;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+body:before {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.3;
+  z-index: -1;
+  content: '';
+  position: fixed;
+  background: url(https://catbk.cn/api/bgc.php) center/cover;
 }
 body,
 button,
@@ -128,12 +145,6 @@ h3 {
   padding: 0;
   z-index: 50;
   color: rgba(0, 0, 0, 0.66);
-}
-body {
-  background: #fff;
-  background-attachment: fixed;
-  cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/normal.cur),
-    auto;
 }
 
 a {

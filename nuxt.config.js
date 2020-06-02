@@ -32,6 +32,8 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
+    '~plugins/check-before-each.js', // 全局路由守卫插件
+    { src: '~/plugins/loading', mode: 'client' }, //Nprogress进度条
     { src: '@/plugins/element-ui' },
     { src: '@/plugins/font-awesome' },
     { src: '~/plugins/vue-aplayer', mode: 'client' }

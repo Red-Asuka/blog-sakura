@@ -4,9 +4,6 @@
 
 <script>
 export default {
-  data() {
-    return {}
-  },
   layout: 'admin'
 }
 </script>

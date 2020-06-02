@@ -83,6 +83,6 @@
 export default {}
 </script>
 
-<style>
+<style scoped>
 @import '@/assets/css/article/SiteContent.css';
 </style>

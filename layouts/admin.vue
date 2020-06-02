@@ -1,8 +1,12 @@
 <template>
   <el-container>
-    <el-header>Header</el-header>
+    <el-header>
+      <my-header />
+    </el-header>
     <el-container>
-      <el-aside width="200px">Aside</el-aside>
+      <el-aside width="200px">
+        <my-aside />
+      </el-aside>
       <el-main>
         <nuxt />
       </el-main>
@@ -11,7 +15,26 @@
 </template>
 
 <script>
-export default {}
+import myAside from '@/components/admin/public/aside.vue'
+import myHeader from '@/components/admin/public/header.vue'
+export default {
+  components: {
+    myAside,
+    myHeader
+  }
+}
 </script>
 
-<style></style>
+<style scoped>
+.el-header {
+  border-bottom: 0.1px solid;
+}
+.el-aside {
+  height: 100%;
+  position: fixed;
+}
+.el-main {
+  margin-top: 5px;
+  margin-left: 200px;
+}
+</style>

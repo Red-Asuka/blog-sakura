@@ -129,6 +129,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import '@/assets/css/cover/index.css';
 </style>
