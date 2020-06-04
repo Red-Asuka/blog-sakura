@@ -13,10 +13,7 @@
               src="https://gravatar.catbk.cn/avatar/56f43d1f6f9e5b6d3a2b893385007161?s=96&d=https%3A%2F%2Fgravatar.ufile.ucloud.com.cn%2FTransparent_Akkarin-e1582610381361.png&r=g"
             ></el-avatar
           ></nuxt-link>
-          <nuxt-link v-else to="/login"
-            ><h1>登录</h1>
-            ></nuxt-link
-          >
+          <nuxt-link v-else to="/login"><h1>登录</h1> </nuxt-link>
         </div>
       </el-col>
     </el-row>

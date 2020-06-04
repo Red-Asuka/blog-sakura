@@ -167,3 +167,13 @@ img {
   max-width: 100%;
   border: 0;
 }
+.el-breadcrumb {
+  margin-bottom: 15px;
+}
+.el-pagination,
+.el-table {
+  margin-top: 15px;
+}
+.el-table {
+  font-size: 12px;
+}

@@ -1,15 +1,17 @@
 <template>
   <div class="aside">
     <el-menu
-      default-active="2"
+      default-active="1"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
     >
-      <el-menu-item index="1">
-        <i class="el-icon-menu"></i>
-        <span slot="title">Home</span>
-      </el-menu-item>
+      <nuxt-link to="/admin">
+        <el-menu-item index="1">
+          <i class="el-icon-menu"></i>
+          <span slot="title">Home</span>
+        </el-menu-item>
+      </nuxt-link>
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -25,9 +27,21 @@
           <i class="el-icon-location"></i>
           <span>链接</span>
         </template>
-        <el-menu-item index="3-1">所有链接</el-menu-item>
-        <el-menu-item index="3-2">添加链接</el-menu-item>
-        <el-menu-item index="3-3">链接分类目录</el-menu-item>
+        <nuxt-link to="/admin/link-manager">
+          <el-menu-item index="3-1">
+            所有链接
+          </el-menu-item>
+        </nuxt-link>
+        <nuxt-link to="/admin/link-add">
+          <el-menu-item index="3-2">
+            添加链接
+          </el-menu-item>
+        </nuxt-link>
+        <nuxt-link to="/admin/link_category">
+          <el-menu-item index="3-3">
+            链接分类目录
+          </el-menu-item>
+        </nuxt-link>
       </el-submenu>
     </el-menu>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <h1>home</h1>
+  <h1>link-add</h1>
 </template>
 
 <script>

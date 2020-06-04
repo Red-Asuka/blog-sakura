@@ -34,7 +34,6 @@ export default {
   position: fixed;
 }
 .el-main {
-  margin-top: 5px;
-  margin-left: 200px;
+  margin: 20px 20px 20px 220px;
 }
 </style>

@@ -12,6 +12,7 @@ import json from 'koa-json'
 import dbConfig from './dbs/config'
 import passport from './interface/utils/passport'
 import users from './interface/users'
+import link_category from './interface/Link_category'
 
 const app = new Koa()
 
@@ -66,6 +67,7 @@ async function start() {
   }
   //导入和配置接口路由（mark）
   app.use(users.routes()).use(users.allowedMethods())
+  app.use(link_category.routes()).use(link_category.allowedMethods())
   app.use(ctx => {
     ctx.status = 200
     ctx.respond = false // Bypass Koa's built-in response handling

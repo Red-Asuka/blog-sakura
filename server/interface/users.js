@@ -15,6 +15,7 @@ let Store = new Redis().client
 //注册接口
 router.post('/signup', async ctx => {
   const { username, password, email, code } = ctx.request.body
+
   //从redis中获取 在nodemail发验证码的时候 的存储数据，并将存储数据与浏览器获取的数据进行对比
   if (code) {
     const saveCode = await Store.hget(`nodemail:${username}`, 'code')

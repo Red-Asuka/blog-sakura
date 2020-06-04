@@ -1,11 +1,17 @@
 <template>
   <div class="admin-hearder">
     <div class="sitehome">
-      <a
+      <!-- <a
         href="/"
         style="background-image: url(https://mediacat.ufile.ucloud.com.cn/wp-content/uploads/2020/02/favorite.png); "
         >十年後の八月</a
+      > -->
+      <nuxt-link
+        style="background-image: url(https://mediacat.ufile.ucloud.com.cn/wp-content/uploads/2020/02/favorite.png); "
+        to="/"
       >
+        <h1>登录</h1>
+      </nuxt-link>
     </div>
     <div class="userinfo">
       <el-dropdown>
