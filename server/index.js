@@ -13,6 +13,9 @@ import dbConfig from './dbs/config'
 import passport from './interface/utils/passport'
 import users from './interface/users'
 import link_category from './interface/Link_category'
+import labels from './interface/Labels'
+import sorts from './interface/sort'
+import article from './interface/article'
 
 const app = new Koa()
 
@@ -31,10 +34,12 @@ app.use(
 app.use(json())
 
 // 连接数据库
+mongoose.set('useCreateIndex', true) //加上这个
 mongoose.connect(
   dbConfig.dbs,
   {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   },
   function(err) {
     if (err) {
@@ -68,6 +73,10 @@ async function start() {
   //导入和配置接口路由（mark）
   app.use(users.routes()).use(users.allowedMethods())
   app.use(link_category.routes()).use(link_category.allowedMethods())
+  app.use(labels.routes()).use(labels.allowedMethods())
+  app.use(sorts.routes()).use(sorts.allowedMethods())
+  app.use(article.routes()).use(article.allowedMethods())
+
   app.use(ctx => {
     ctx.status = 200
     ctx.respond = false // Bypass Koa's built-in response handling

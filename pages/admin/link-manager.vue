@@ -17,7 +17,7 @@
               setLinkDialogVisible = true
               dialog_title = '添加链接'
             "
-            >添加分类</el-button
+            >添加链接</el-button
           >
         </el-col>
       </el-row>
@@ -25,11 +25,41 @@
       <el-table :data="linklist" border stripe>
         <!-- 索引列 -->
         <el-table-column type="index"></el-table-column>
-        <el-table-column prop="link_id" label="ID" width="180">
+        <el-table-column label="名称" width="180">
+          <template slot-scope="scope">
+            <el-link
+              target="_blank"
+              type="primary"
+              @click="jumpSite(scope.$index, scope.row.siteurl)"
+              >{{ scope.row.name }}
+            </el-link>
+          </template>
         </el-table-column>
-        <el-table-column prop="name" label="名称" width="180">
+        <el-table-column label="URL" width="280">
+          <template slot-scope="scope">
+            <el-link
+              target="_blank"
+              type="primary"
+              @click="jumpSite(scope.$index, scope.row.siteurl)"
+              >{{ scope.row.siteurl }}
+            </el-link>
+          </template>
         </el-table-column>
-        <el-table-column prop="description" label="描述"> </el-table-column>
+        <el-table-column
+          prop="link_type"
+          label="分类目录"
+          width="180"
+        ></el-table-column>
+        <el-table-column label="头像地址">
+          <template slot-scope="scope">
+            <el-link
+              target="_blank"
+              type="primary"
+              @click="jumpSite(scope.$index, scope.row.avatar)"
+              >{{ scope.row.avatar }}
+            </el-link>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" width="300px">
           <template slot-scope="scope">
             <el-button
@@ -77,6 +107,18 @@
         <el-form-item label="头像地址" prop="avatar">
           <el-input v-model="addlink.avatar"></el-input>
         </el-form-item>
+        <!-- 分类选择 -->
+        <el-form-item label="分类选择" prop="link_type">
+          <el-select v-model="addlink.link_type" placeholder="请选择">
+            <el-option
+              v-for="item in link_typelist"
+              :key="item.link_id"
+              :label="item.name"
+              :value="item.name"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="setLinkDialogVisible = false">取 消</el-button>
@@ -95,6 +137,8 @@ export default {
     return {
       //链接数组
       linklist: [],
+      //链接分类数组
+      link_typelist: [],
       // 控制分配权限对话框的显示与隐藏
       setLinkDialogVisible: false,
       dialog_title: '添加链接',
@@ -104,7 +148,8 @@ export default {
         description: '',
         siteurl: '',
         avatar: '',
-        _id: ''
+        _id: '',
+        link_type: ''
       },
       //校验规则
       rules: {
@@ -115,17 +160,25 @@ export default {
         siteurl: [
           { required: true, message: '请输入主页地址', trigger: 'blur' }
         ],
-        avatar: [{ required: true, message: '请输入头像地址', trigger: 'blur' }]
+        avatar: [
+          { required: true, message: '请输入头像地址', trigger: 'blur' }
+        ],
+        link_type: [
+          { required: true, message: '请选择链接分类', trigger: 'change' }
+        ]
       }
     }
   },
   created() {
+    //获取友链
+    this.getLinklist()
+    //获取友链分类
     this.findLink()
   },
   methods: {
-    //查询友链分类
-    findLink: async function() {
-      const { status, data } = await this.$axios.get('/alink/getlinkcategory')
+    //查询友链
+    getLinklist: async function() {
+      const { status, data } = await this.$axios.get('/alink/getlink')
       if (status === 200) {
         if (data && data.code === 0) {
           this.$message({
@@ -133,6 +186,7 @@ export default {
             type: 'success'
           })
           this.linklist = data.data
+          console.log(this.linklist)
         } else {
           this.$message({
             message: data.msg,
@@ -146,7 +200,31 @@ export default {
         })
       }
     },
-    //添加或更改友链分类
+    //查询友链分类
+    findLink: async function() {
+      const { status, data } = await this.$axios.get('/alink/getlinkcategory')
+      if (status === 200) {
+        if (data && data.code === 0) {
+          this.$message({
+            message: data.msg,
+            type: 'success'
+          })
+          this.link_typelist = data.data
+          // console.log(this.link_typelist)
+        } else {
+          this.$message({
+            message: data.msg,
+            type: 'error'
+          })
+        }
+      } else {
+        this.$message({
+          message: `服务器出错，错误码:${status}`,
+          type: 'error'
+        })
+      }
+    },
+    //添加或更改友链
     allotRights: async function(formName) {
       this.$refs[formName].validate(async valid => {
         if (valid) {
@@ -154,7 +232,7 @@ export default {
           if (this.dialog_title === '添加链接') {
             apikey = 'addlink'
           } else {
-            apikey = 'updatelinkcategory'
+            apikey = 'updatelink'
           }
           const { status, data } = await this.$axios.post(
             `/alink/${apikey}`,
@@ -167,7 +245,7 @@ export default {
                 message: data.msg,
                 type: 'success'
               })
-              this.findLink()
+              this.getLinklist()
               this.setLinkDialogClosed()
               this.setLinkDialogVisible = false
             } else {
@@ -192,25 +270,29 @@ export default {
     setLinkDialogClosed: function() {
       this.addlink.name = ''
       this.addlink.description = ''
-      this.addlink.link_id = ''
+      this.addlink.siteurl = ''
+      this.addlink.avatar = ''
       this.addlink._id = ''
+      this.addlink.link_type = ''
     },
-    //修改友链分类
+    //修改友链
     handleEdit: function(index, row) {
       console.log(index, row)
-      this.dialog_title = '修改分类'
+      this.dialog_title = '修改链接'
       this.addlink.name = row.name
       this.addlink.description = row.description
-      this.addlink.link_id = row.link_id
+      this.addlink.siteurl = row.siteurl
+      this.addlink.avatar = row.avatar
       this.addlink._id = row._id
+      this.addlink.link_type = row.link_type
       this.setLinkDialogVisible = true
     },
-    //删除分类
+    //删除链接
     handleDelete: async function(index, row) {
       console.log(index, row)
       // 弹框提示用户是否要删除
       const confirmResult = await this.$confirm(
-        '此操作将永久删除该分类, 是否继续?',
+        '此操作将永久删除该链接, 是否继续?',
         '提示',
         {
           confirmButtonText: '确定',
@@ -223,19 +305,16 @@ export default {
         return this.$message.info('取消了删除！')
       }
 
-      const { status, data } = await this.$axios.post(
-        '/alink/deletelinkcategory',
-        {
-          link_id: row.link_id
-        }
-      )
+      const { status, data } = await this.$axios.post('/alink/deletelink', {
+        _id: row._id
+      })
       if (status === 200) {
         if (data && data.code === 0) {
           this.$message({
             message: data.msg,
             type: 'success'
           })
-          this.findLink()
+          this.getLinklist()
           this.setLinkDialogClosed()
         } else {
           this.$message({
@@ -249,6 +328,11 @@ export default {
           type: 'error'
         })
       }
+    },
+    //跳转链接
+    jumpSite: async function(index, url) {
+      console.log(index, url)
+      window.open(url)
     }
   }
 }

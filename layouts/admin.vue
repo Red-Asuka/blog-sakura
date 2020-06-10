@@ -27,13 +27,22 @@ export default {
 
 <style scoped>
 .el-header {
-  border-bottom: 0.1px solid;
+  border-bottom: solid 1px #e6e6e6;
+  z-index: 2000;
+  top: 0;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  background: #fff;
 }
 .el-aside {
   height: 100%;
   position: fixed;
+  left: 0;
+  top: 60px;
+  border-right: solid 1px #e6e6e6;
 }
 .el-main {
-  margin: 20px 20px 20px 220px;
+  margin: 80px 20px 20px 220px;
 }
 </style>

@@ -17,10 +17,26 @@
           <i class="el-icon-location"></i>
           <span>内容管理</span>
         </template>
-        <el-menu-item index="2-1">所有文章</el-menu-item>
-        <el-menu-item index="2-2">写文章</el-menu-item>
-        <el-menu-item index="2-3">分类目录</el-menu-item>
-        <el-menu-item index="2-4">标签</el-menu-item>
+        <nuxt-link to="/admin/edit">
+          <el-menu-item index="2-1">
+            所有文章
+          </el-menu-item>
+        </nuxt-link>
+        <nuxt-link to="/admin/post_new">
+          <el-menu-item index="2-2">
+            写文章
+          </el-menu-item>
+        </nuxt-link>
+        <nuxt-link to="/admin/post_category">
+          <el-menu-item index="2-3">
+            分类目录
+          </el-menu-item>
+        </nuxt-link>
+        <nuxt-link to="/admin/post_tag">
+          <el-menu-item index="2-4">
+            标签
+          </el-menu-item>
+        </nuxt-link>
       </el-submenu>
       <el-submenu index="3">
         <template slot="title">
@@ -32,13 +48,8 @@
             所有链接
           </el-menu-item>
         </nuxt-link>
-        <nuxt-link to="/admin/link-add">
-          <el-menu-item index="3-2">
-            添加链接
-          </el-menu-item>
-        </nuxt-link>
         <nuxt-link to="/admin/link_category">
-          <el-menu-item index="3-3">
+          <el-menu-item index="3-2">
             链接分类目录
           </el-menu-item>
         </nuxt-link>

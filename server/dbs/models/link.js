@@ -15,10 +15,9 @@ const LinkSchema = new Schema({
   },
   siteurl: {
     type: String,
-    unique: true,
     require: true
   },
-  linktype: {
+  link_type: {
     type: String,
     require: true
   }
