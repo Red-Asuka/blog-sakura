@@ -39,6 +39,58 @@ router.post('/addarticle', async ctx => {
     }
   }
 })
+//查询文章
+router.get('/getarticle', async ctx => {
+  const { _id } = ctx.request.body
+  // console.log(ctx.request.body)
+  let res = ''
+  if (_id) {
+    res = await articles.find(_id)
+  } else {
+    res = await articles.find()
+  }
+  if (res) {
+    ctx.body = {
+      code: 0,
+      msg: '查询成功',
+      data: res
+    }
+  } else {
+    ctx.body = {
+      code: 0,
+      msg: '查询失败'
+    }
+  }
+})
+//修改文章
+router.post('/updatearticle', async ctx => {
+  const {
+    post_title,
+    sort_id,
+    post_bg,
+    post_description,
+    post_content,
+    post_tags,
+    _id
+  } = ctx.request.body
+  // console.log(ctx.request.body)
+  let narticle = await articles.updateOne(
+    { _id },
+    { post_title, sort_id, post_bg, post_description, post_content, post_tags }
+  )
+  if (narticle) {
+    ctx.body = {
+      code: 0,
+      msg: '修改文章成功',
+      data: narticle
+    }
+  } else {
+    ctx.body = {
+      code: -1,
+      msg: '修改文章失败'
+    }
+  }
+})
 //文件上传
 //配置
 var storage = multer.diskStorage({
