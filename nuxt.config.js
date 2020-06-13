@@ -35,6 +35,7 @@ module.exports = {
     '~plugins/check-before-each.js', // 全局路由守卫插件
     { src: '~/plugins/loading', mode: 'client' }, //Nprogress进度条
     { src: '@/plugins/vue-mavon-editor', mode: 'client' }, //markdown插件
+    { src: '~/plugins/commom.js', mode: 'client' }, //常用工具方法
     { src: '@/plugins/element-ui' },
     { src: '@/plugins/font-awesome' },
     { src: '~/plugins/vue-aplayer', mode: 'client' }

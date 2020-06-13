@@ -91,6 +91,23 @@ router.post('/updatearticle', async ctx => {
     }
   }
 })
+//删除文章
+router.post('/deletearticle', async ctx => {
+  let res = await articles.remove({ _id: ctx.request.body._id })
+
+  if (res) {
+    ctx.body = {
+      code: 0,
+      msg: '删除成功',
+      data: res
+    }
+  } else {
+    ctx.body = {
+      code: 0,
+      msg: '删除失败'
+    }
+  }
+})
 //文件上传
 //配置
 var storage = multer.diskStorage({
