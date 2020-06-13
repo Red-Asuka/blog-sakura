@@ -14,6 +14,7 @@ router.post('/addarticle', async ctx => {
     post_bg,
     post_description,
     post_content,
+    post_contentMarkdown,
     post_tags
   } = ctx.request.body
   // console.log(ctx.request.body)
@@ -24,6 +25,7 @@ router.post('/addarticle', async ctx => {
     post_bg,
     post_description,
     post_content,
+    post_contentMarkdown,
     post_tags
   })
   if (narticle) {
@@ -41,11 +43,11 @@ router.post('/addarticle', async ctx => {
 })
 //查询文章
 router.get('/getarticle', async ctx => {
-  const { _id } = ctx.request.body
-  // console.log(ctx.request.body)
+  const { _id } = ctx.request.query
+
   let res = ''
   if (_id) {
-    res = await articles.find(_id)
+    res = await articles.findOne({ _id })
   } else {
     res = await articles.find()
   }
@@ -70,13 +72,22 @@ router.post('/updatearticle', async ctx => {
     post_bg,
     post_description,
     post_content,
+    post_contentMarkdown,
     post_tags,
     _id
   } = ctx.request.body
   // console.log(ctx.request.body)
   let narticle = await articles.updateOne(
     { _id },
-    { post_title, sort_id, post_bg, post_description, post_content, post_tags }
+    {
+      post_title,
+      sort_id,
+      post_bg,
+      post_description,
+      post_content,
+      post_contentMarkdown,
+      post_tags
+    }
   )
   if (narticle) {
     ctx.body = {

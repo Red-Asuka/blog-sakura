@@ -12,9 +12,7 @@
       <el-row>
         <el-col :span="3">
           <nuxt-link to="/admin/post_new">
-            <el-button type="primary" @click="setLinkDialogVisible = true"
-              >写文章</el-button
-            >
+            <el-button type="primary">写文章</el-button>
           </nuxt-link>
         </el-col>
         <el-col :span="4" :offset="17">
@@ -197,6 +195,12 @@ export default {
         data[j].post_date = this.utils.formatDate(data[j].post_date)
       }
       return data
+    },
+    //修改文章
+    handleEdit: function(index, row) {
+      console.log(index, row)
+      let id = row._id
+      this.$router.push({ path: '/admin/edit/' + id })
     },
     //删除文章
     handleDelete: async function(index, row) {

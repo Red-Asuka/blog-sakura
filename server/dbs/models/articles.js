@@ -21,6 +21,10 @@ const ArticleSchema = new Schema({
     type: String,
     require: true
   },
+  post_contentMarkdown: {
+    type: String,
+    require: true
+  },
   post_tags: {
     type: Array,
     require: true

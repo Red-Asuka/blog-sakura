@@ -81,6 +81,7 @@
                 placeholder="...开始你的表演！"
                 @save="ContentSave"
                 @change="ContentSave"
+                v-model="addpost.post_contentMarkdown"
               />
             </no-ssr>
           </div>
@@ -98,7 +99,7 @@ export default {
   layout: 'admin',
   data() {
     return {
-      btntext: '提交',
+      btntext: '更新',
       //添加文章
       addpost: {
         post_title: '',
@@ -142,6 +143,8 @@ export default {
     this.getPostType()
     //查询文章标签
     this.getPostTags()
+    //根据id查询文章
+    this.getPostbyId()
   },
   methods: {
     //查询文章分类
@@ -192,6 +195,36 @@ export default {
         })
       }
     },
+    //根据id查询文章
+    getPostbyId: async function() {
+      let _id = this.$route.params.id
+      //   console.log(_id)
+      const { status, data } = await this.$axios.get('/article/getarticle', {
+        params: {
+          _id
+        }
+      })
+      if (status === 200) {
+        if (data && data.code === 0) {
+          this.$message({
+            message: data.msg,
+            type: 'success'
+          })
+          this.addpost = data.data
+          console.log(this.addpost)
+        } else {
+          this.$message({
+            message: data.msg,
+            type: 'error'
+          })
+        }
+      } else {
+        this.$message({
+          message: `服务器出错，错误码:${status}`,
+          type: 'error'
+        })
+      }
+    },
     //文章内容保存
     ContentSave: function(value, render) {
       this.addpost.post_contentMarkdown = value
@@ -203,14 +236,8 @@ export default {
       //文章校验
       let flag = this.paramsValidate(formName)
       if (flag && formName.post_tags.length != 0) {
-        let apikey = ''
-        if (this.btntext === '提交') {
-          apikey = 'addarticle'
-        } else {
-          apikey = 'updatearticle'
-        }
         const { status, data } = await this.$axios.post(
-          `/article/${apikey}`,
+          '/article/updatearticle',
           this.addpost
         )
         if (status === 200) {
@@ -219,10 +246,6 @@ export default {
               message: data.msg,
               type: 'success'
             })
-            if (this.btntext != '更新') {
-              this.addpost._id = data.data._id
-            }
-            this.btntext = '更新'
             console.log(data)
             console.log(this.addpost)
           } else {
