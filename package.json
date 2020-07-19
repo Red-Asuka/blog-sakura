@@ -43,6 +43,8 @@
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
     "passport-local": "^1.0.0",
+    "qiniu": "^7.3.2",
+    "qiniu-js": "^3.0.3",
     "sass-loader": "^8.0.2",
     "vue-aplayer": "^1.6.1"
   },

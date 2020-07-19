@@ -55,7 +55,8 @@
           <el-upload
             class="avatar-uploader"
             id="imguplad"
-            action="/article/upload"
+            action="https://upload.qiniup.com"
+            :data="qn"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
@@ -134,7 +135,12 @@ export default {
       //文章分类数组
       post_typelist: [],
       //文章标签数组
-      post_taglist: []
+      post_taglist: [],
+      //七牛图片上传
+      qn: {
+        token: '',
+        key: ''
+      }
     }
   },
   created() {
@@ -260,10 +266,10 @@ export default {
     },
     //返回上传的图片地址
     handleAvatarSuccess(res, file) {
-      this.addpost.post_bg = URL.createObjectURL(file.raw)
+      this.addpost.post_bg = 'https://gravatar.catbk.cn/' + res.key
     },
     //上传封面前检查
-    beforeAvatarUpload(file) {
+    async beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg'
       const isGIF = file.type === 'image/gif'
       const isPNG = file.type === 'image/png'
@@ -277,7 +283,26 @@ export default {
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
+      //根据文件名生成上传唯一key值
+      let key =
+        'blog/image/' +
+        this.utils.formatDate(new Date().getTime(), 'YY/MM/DD/hh:mm:ss/') +
+        file.name
+      console.log(key)
+      await this.getuploadToken(key)
       return (isJPG || isGIF || isPNG || isBMP) && isLt2M
+    },
+    //获取七牛上传token
+    getuploadToken: async function(key) {
+      const { status, data } = await this.$axios.post('/qiniu/upload', {
+        key
+      })
+      // console.log(status, data)
+      if (status == 200 && data.uptoken) {
+        this.qn.token = data.uptoken
+        this.qn.key = key
+        // console.log(this.qn)
+      }
     }
   }
 }

@@ -16,6 +16,7 @@ import link_category from './interface/Link_category'
 import labels from './interface/Labels'
 import sorts from './interface/sort'
 import article from './interface/article'
+import qiniuupload from './interface/qiniuupload'
 
 const app = new Koa()
 
@@ -76,6 +77,7 @@ async function start() {
   app.use(labels.routes()).use(labels.allowedMethods())
   app.use(sorts.routes()).use(sorts.allowedMethods())
   app.use(article.routes()).use(article.allowedMethods())
+  app.use(qiniuupload.routes()).use(qiniuupload.allowedMethods())
 
   app.use(ctx => {
     ctx.status = 200
